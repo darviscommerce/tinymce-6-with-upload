@@ -1,0 +1,1 @@
+# TinyMCE 6 editor with easy PHP upload
