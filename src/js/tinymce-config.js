@@ -1,6 +1,6 @@
 tinymce.init({
-  selector: '#mytextarea',
   language: 'nl',
+  selector: '#mytextarea',
   content_css: 'css/style.css',
   images_upload_url: 'tinymanager/upload.php',
   /**
@@ -9,6 +9,7 @@ tinymce.init({
   browser_spellcheck: true,
   contextmenu: false, // Disabling the contextmenu option may be required depending on the right-click or context usability requirement.
   relative_urls: false, // Keep slash at the front of an url
+  image_advtab: true,
   /**
    * Menu
    */
@@ -49,9 +50,5 @@ tinymce.init({
       dataType: 'json',
     });
     alert('Saved \r\n')
-  },
-  /**
-   * Images
-   */
-  image_advtab: true,
+  }
 })

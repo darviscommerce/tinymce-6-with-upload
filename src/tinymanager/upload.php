@@ -1,6 +1,5 @@
 <?php
 define('BASEPATH', dirname(__FILE__));
-header('X-Darvis: ' . $_SERVER['HTTP_ORIGIN']);
 header('X-Author: arvid de Jong (arvid@darvis.nl)');
 
 /***************************************************
@@ -15,6 +14,7 @@ $imageFolder = "/src/uploads/";
 $uploadFolder = "../uploads/";
 
 if (isset($_SERVER['HTTP_ORIGIN'])) {
+  header('X-Darvis: ' . $_SERVER['HTTP_ORIGIN']);
   // same-origin requests won't set an origin. If the origin is set, it must be valid.
   if (in_array($_SERVER['HTTP_ORIGIN'], $accepted_origins)) {
     header('Access-Control-Allow-Origin: ' . $_SERVER['HTTP_ORIGIN']);
@@ -32,7 +32,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
 
 reset($_FILES);
 $temp = current($_FILES);
-if (is_uploaded_file($temp['tmp_name'])) {
+if (isset($_SERVER['HTTP_ORIGIN']) && is_uploaded_file($temp['tmp_name'])) {
   include('functions.inc.php');
   /*
       If your script needs to receive cookies, set images_upload_credentials : true in
