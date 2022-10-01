@@ -1,8 +1,10 @@
+var external_filemanager_path = '/src/tinymanager/'
 tinymce.init({
   language: 'nl',
   selector: '#mytextarea',
   content_css: 'css/style.css',
   images_upload_url: 'tinymanager/upload.php',
+
   /**
    * Options
    */
@@ -14,9 +16,9 @@ tinymce.init({
    * Menu
    */
   plugins:
-    'media image link table save code charmap emoticons advlist lists wordcount searchreplace help',
+    'media image link table save code charmap emoticons advlist lists wordcount searchreplace help darvisfilemanager',
   toolbar: [
-    'save | searchreplace undo redo | bold italic underline strikethrough | alignleft aligncenter alignright | link media image',
+    'save darvisfilemanager | searchreplace undo redo | bold italic underline strikethrough | alignleft aligncenter alignright | link media image',
     'charmap emoticons |  numlist bullist',
     'styles fontfamily fontsize | forecolor backcolor removeformat ',
     'table tabledelete | tableprops tablerowprops tablecellprops | tableinsertrowbefore tableinsertrowafter tabledeleterow | tableinsertcolbefore tableinsertcolafter tabledeletecol',
@@ -48,7 +50,16 @@ tinymce.init({
         content: content,
       },
       dataType: 'json',
-    });
+    })
     alert('Saved \r\n')
+  },
+  setup: (editor) => {
+    editor.on('click', () => {
+      console.log('Editor was clicked')
+    })
+    editor.options.register('custom_option', {
+      processor: 'string',
+      default: external_filemanager_path,
+    })
   }
 })
