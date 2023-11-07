@@ -27,6 +27,12 @@ tinymce.init({
   /**
    * Save content
    */
+  init_instance_callback: function (editor) {
+    editor.on('blur', function (e) {
+      // console.log('Editor was blurred!' + this.getContent());
+      editor.save();
+    });
+  },
   save_enablewhendirty: false,
   save_oncancelcallback: function () {
     alert('Save canceled')
